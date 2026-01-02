@@ -58,6 +58,81 @@ const Help = () => {
         </div>
       </div>
 
+      {/* Books Section */}
+      <div style={styles.supportSection}>
+        <h2 style={styles.supportTitle}>Recommended Books</h2>
+        
+        <div style={styles.supportContainer}>
+          <div style={styles.supportCard}>
+            <div style={styles.supportIcon}>📖</div>
+            <div>
+              <a 
+                href="https://how-to-talk.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.directoryLink}
+              >
+                How To Talk So Kids Will Listen
+              </a>
+              <p style={styles.supportDescription}>
+                by Joanna Faber & Julie King. Learn skills to help children handle strong emotions and engage cooperation.
+              </p>
+            </div>
+          </div>
+          
+          <div style={styles.supportCard}>
+            <div style={styles.supportIcon}>📖</div>
+            <div>
+              <a 
+                href="https://www.paulaxtell.com/store/10-powerful-things-to-say-to-your-kids/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.directoryLink}
+              >
+                10 Powerful Things to Say to Your Kids
+              </a>
+              <p style={styles.supportDescription}>
+                by Paul Axtell. A guide to creating wonderful, lasting relationships through the power of conversation.
+              </p>
+            </div>
+          </div>
+          
+          <div style={styles.supportCard}>
+            <div style={styles.supportIcon}>📖</div>
+            <div>
+              <a 
+                href="https://www.thedisengagedteen.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.directoryLink}
+              >
+                The Awakened Family: A Revolution in Parenting
+              </a>
+              <p style={styles.supportDescription}>
+                by Shefali Tsabary Ph.D. A radically transformative plan that shows parents how to raise children to be their best, truest selves.
+              </p>
+            </div>
+          </div>
+
+          <div style={styles.supportCard}>
+            <div style={styles.supportIcon}>📖</div>
+            <div>
+              <a 
+                href="https://www.thedisengagedteen.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={styles.directoryLink}
+              >
+                The Disengaged Teen
+              </a>
+              <p style={styles.supportDescription}>
+                by Jenny Anderson and Rebecca Winthrop. A toolkit showing what to do (and stop doing) to support teen academic and emotional flourishing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* More Support & Education */}
       <div style={styles.supportSection}>
         <h2 style={styles.supportTitle}>More Support & Education</h2>

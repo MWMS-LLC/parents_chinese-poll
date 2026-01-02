@@ -250,7 +250,7 @@ const Landing = () => {
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText('https://parents.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a')
+      await navigator.clipboard.writeText('https://parents-chinese.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a')
       setCopySuccess(true)
       setTimeout(() => setCopySuccess(false), 2000)
     } catch (err) {
@@ -265,7 +265,7 @@ const Landing = () => {
   const hasConnectedAccounts = Object.values(socialHandles).some(handle => handle && handle.trim() !== '')
 
   const handleSocialShare = (platform) => {
-    const url = 'https://parents.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a'
+    const url = 'https://parents-chinese.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a'
     const text = 'Check out this parents poll app - My World My Say!'
     
     switch (platform) {
@@ -429,7 +429,7 @@ const Landing = () => {
             <div style={styles.linkContainer}>
               <input 
                 type="text" 
-                value="https://parents.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a" 
+                value="https://parents-chinese.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a" 
                 readOnly 
                 style={styles.linkInput}
               />

@@ -5,11 +5,11 @@ from datetime import datetime
 from dotenv import load_dotenv, find_dotenv
 import pandas as pd
 
-# Load environment variables robustly (root .env)
-env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+# Load environment variables robustly (backend .env)
+env_path = os.path.join(os.path.dirname(__file__), '.env')
 loaded = load_dotenv(dotenv_path=env_path)
 if not loaded:
-    # Try auto-discovery from project root
+    # Try auto-discovery from current directory
     auto_env = find_dotenv(usecwd=True)
     if auto_env:
         load_dotenv(auto_env)
@@ -17,9 +17,9 @@ if not loaded:
 # Debug: show if DATABASE_URL is present without leaking secrets
 _db_url = os.getenv('DATABASE_URL', '')
 if not _db_url:
-    # Manual fallback: parse ../.env and inject key=value pairs
+    # Manual fallback: parse .env and inject key=value pairs
     try:
-        env_file = os.path.join(os.path.dirname(__file__), '..', '.env')
+        env_file = os.path.join(os.path.dirname(__file__), '.env')
         if os.path.exists(env_file):
             with open(env_file, 'r', encoding='utf-8') as f:
                 for line in f:
@@ -59,7 +59,7 @@ def import_setup_data():
     # Database connection
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
-        raise RuntimeError('DATABASE_URL not set. Ensure parents1002/.env contains DATABASE_URL and is readable.')
+        raise RuntimeError('DATABASE_URL not set. Ensure backend/.env contains DATABASE_URL and is readable.')
     
     try:
         # Connect to PostgreSQL

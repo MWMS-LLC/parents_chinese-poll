@@ -1,5 +1,5 @@
 // Soundtrack service for managing music data and playlist integration
-const API_BASE = import.meta.env.VITE_API_BASE;
+import API_BASE from '../config.js';
 
 class SoundtrackService {
   constructor() {
@@ -11,14 +11,26 @@ class SoundtrackService {
   // Load soundtrack data from backend API
   async loadSoundtracks() {
     try {
+      console.log('🎵 Fetching soundtracks from:', `${API_BASE}/api/soundtracks`)
       // Fetch soundtracks from backend API
       const response = await fetch(`${API_BASE}/api/soundtracks`);
+      console.log('🎵 Response status:', response.status, response.statusText)
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
       
       const data = await response.json()
-      console.log('Loaded soundtracks from API:', data.soundtracks.length)
+      console.log('🎵 API response data:', data)
+      console.log('🎵 Loaded soundtracks from API:', data.soundtracks?.length || 0)
+      
+      if (!data.soundtracks || data.soundtracks.length === 0) {
+        console.warn('⚠️ No soundtracks returned from API, using fallback data')
+        const fallback = this.getFallbackData()
+        this.soundtracks = fallback
+        this.loaded = true
+        return fallback
+      }
       
       // Transform the data to match our component's format
       this.soundtracks = data.soundtracks.map(song => ({
@@ -32,59 +44,80 @@ class SoundtrackService {
         fileUrl: song.file_url
       }))
       
+      console.log('🎵 Transformed soundtracks:', this.soundtracks.length)
+      
       // Load playlists from API
       await this.loadPlaylists()
       
       this.loaded = true
       return this.soundtracks
     } catch (error) {
-      console.error('Error loading soundtracks from API:', error)
+      console.error('❌ Error loading soundtracks from API:', error)
+      console.error('❌ Error details:', error.message, error.stack)
       // Fallback to minimal data if API fails
-      return this.getFallbackData()
+      const fallback = this.getFallbackData()
+      this.soundtracks = fallback
+      this.loaded = true
+      return fallback
     }
   }
   
   // Load playlists from backend API
   async loadPlaylists() {
     try {
+      console.log('🎵 Fetching playlists from:', `${API_BASE}/api/soundtracks/playlists`)
       const response = await fetch(`${API_BASE}/api/soundtracks/playlists`);
+      console.log('🎵 Playlists response status:', response.status, response.statusText)
+      
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log('🎵 Playlists API response data:', data)
       this.playlists = [];
 
       // Normalize: split comma-separated items and trim
-      data.playlists.forEach(item => {
-        item.split(',').map(p => p.trim()).forEach(playlist => {
-          if (!this.playlists.includes(playlist)) {
-            this.playlists.push(playlist);
+      if (data.playlists && Array.isArray(data.playlists)) {
+        data.playlists.forEach(item => {
+          if (item) {
+            item.split(',').map(p => p.trim()).forEach(playlist => {
+              if (playlist && !this.playlists.includes(playlist)) {
+                this.playlists.push(playlist);
+              }
+            });
           }
         });
-      });
+      }
+
+      console.log('🎵 Extracted playlists:', this.playlists)
 
     } catch (error) {
-      console.error('Error loading playlists from API:', error);
+      console.error('❌ Error loading playlists from API:', error);
+      console.error('❌ Error details:', error.message, error.stack)
 
       // Fallback: extract from soundtracks
       this.playlists = ['All Songs'];
-      this.soundtracks.forEach(song => {
-        if (song.playlist) {
-          const songPlaylists = song.playlist.split(',').map(p => p.trim());
-          songPlaylists.forEach(playlist => {
-            if (!this.playlists.includes(playlist)) {
-              this.playlists.push(playlist);
-            }
-          });
-        }
-      });
+      if (this.soundtracks && this.soundtracks.length > 0) {
+        this.soundtracks.forEach(song => {
+          if (song.playlist) {
+            const songPlaylists = song.playlist.split(',').map(p => p.trim());
+            songPlaylists.forEach(playlist => {
+              if (playlist && !this.playlists.includes(playlist)) {
+                this.playlists.push(playlist);
+              }
+            });
+          }
+        });
+      }
+      console.log('🎵 Fallback playlists:', this.playlists)
     }
 
     // ✅ Keep "All Songs" at the top, sort the rest alphabetically
     const hasAllSongs = this.playlists.includes('All Songs');
     const sorted = this.playlists.filter(p => p !== 'All Songs').sort((a, b) => a.localeCompare(b));
     this.playlists = hasAllSongs ? ['All Songs', ...sorted] : sorted;
+    console.log('🎵 Final playlists:', this.playlists)
   }
 
   

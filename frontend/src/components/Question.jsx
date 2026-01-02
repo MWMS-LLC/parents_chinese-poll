@@ -5,12 +5,12 @@ import OptionsList from './OptionsList.jsx'
 import ValidationBox from './ValidationBox.jsx'
 import ResultsBarChart from './ResultsBarChart.jsx'
 import { submitVote, submitCheckboxVote, submitOtherVote } from '../services/apiService.js'
-const API_BASE = import.meta.env.VITE_API_BASE;
+import API_BASE from '../config.js'
 
 const Question = ({ question, onAnswered }) => {
   // ===== VOTING COOLDOWN CONFIGURATION =====
   // Adjust these values as needed:
-  const VOTING_COOLDOWN_HOURS = 24  // 24 hours cooldown
+  const VOTING_COOLDOWN_HOURS = 0  // 0 hours cooldown
   //const VOTING_COOLDOWN_MINUTES = 1  // 1 minute cooldown (commented out)
   
   // ===== VOTING COOLDOWN LOGIC =====

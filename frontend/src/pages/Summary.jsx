@@ -80,7 +80,7 @@ const Summary = () => {
   }
 
   const handleShare = () => {
-    const shareText = `I just shared my thoughts on ${categoryName} at My World My Say!\n\nSee what parents are saying: https://parents.myworldmysay.com`
+    const shareText = `I just shared my thoughts on ${categoryName} at My World My Say!\n\nSee what parents are saying: https://parents-chinese.myworldmysay.com`
     
     navigator.clipboard.writeText(shareText).then(() => {
       setCopySuccess(true)
@@ -150,7 +150,7 @@ const Summary = () => {
 
         <div style={styles.futureNote}>
           <span style={styles.futureNoteIcon}>✨</span>
-          <span style={styles.futureNoteText}>Personalized AI summaries coming soon!</span>
+          <span style={styles.futureNoteText}>✨ More detailed personalized summaries coming soon!</span>
         </div>
 
         <div style={styles.buttonsContainer}>

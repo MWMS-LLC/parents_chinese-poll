@@ -49,7 +49,9 @@ origins = [
     "https://www.myworldmysay.com",
     "https://api.myworldmysay.com",
     "https://teen.myworldmysay.com",
-    "https://parents.myworldmysay.com"
+    "https://parents.myworldmysay.com",
+    "https://parents-chinese.myworldmysay.com",
+    "https://www.parents-chinese.myworldmysay.com"
 ]
 
 app.add_middleware(

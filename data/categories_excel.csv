@@ -1,9 +1,0 @@
-﻿id,category_name,category_text,day_of_week,description,category_text_long,version,uuid,sort_order,created_at
-1,Hopes,Questions about the hopes you have for your child,"[0, 1, 2, 3, 4, 5, 6]",Hopes,Questions about the hopes you have for your child,1,45db545e-3ee2-42f4-bd47-8b39eef79004,0,2025-10-06 07:18:52.152416
-2,Home_Life,Questions about your home life with your child,"[0, 1, 2, 3, 4, 5, 6]",Home_Life,Questions about your home life with your child,1,y839ab8a-972f-484e-8348-82158b7fc638,0,2025-10-06 07:18:52.210348
-3,Communication,Questions about how you and your child communicate,"[0, 1, 2, 3, 4, 5, 6]",Communication,Questions about how you and your child communicate,1,ae88e752-d0b0-4731-bf4f-f237195141ab,0,2025-10-06 07:18:52.240538
-4,Mental_Health,Questions about your and your child's mental well-being,"[0, 1, 2, 3, 4, 5, 6]",Mental_Health,Questions about your and your child's mental well-being,1,9d1c0780-3656-44fa-9974-96d2d8c83840,0,2025-10-06 07:18:52.268392
-5,Love,Questions about your child's early romantic feelings,"[0, 1, 2, 3, 4, 5, 6]",Love,Questions about your child's early romantic feelings,1,e939ab8a-972f-484e-8348-82158b7fc634,0,2025-10-06 07:18:52.297526
-6,Friends,Questions about your child's friendships,"[0, 1, 2, 3, 4, 5, 6]",Friends,Questions about your child's friendships,1,ze88e753-d0b0-4731-bf4f-f237195141ab,0,2025-10-06 07:18:52.326014
-7,Online_Life,Questions about your child's use of internet,"[0, 1, 2, 3, 4, 5, 6]",Online_Life,Questions about your child's use of internet,1,a7b1b8f3-360f-44c4-bb2b-e1cfd07177e8,0,2025-10-06 07:18:52.354393
-8,Parenting,Questions about your own feelings and experiences as a parent,"[0, 1, 2, 3, 4, 5, 6]",Parenting,Questions about your own feelings and experiences as a parent,1,732286f1-1cc3-47f9-a8b6-3fe2606e8028,0,2025-10-06 07:18:52.381471

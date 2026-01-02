@@ -334,6 +334,7 @@ export const AudioProvider = ({ children }) => {
       <audio 
         ref={soundtrackAudioRef} 
         preload="metadata" 
+        crossOrigin="anonymous"
         style={{display: 'none'}}
         onLoadStart={() => console.log('🎵 Soundtrack audio element ready')}
       />
