@@ -111,20 +111,39 @@ def import_setup_data_chinese():
                     content = day_of_week_str[1:-1]  # Remove { and }
                     day_of_week_array = [int(day.strip()) for day in content.split(',') if day.strip()]
                 
-                cursor.execute("""
-                    INSERT INTO categories (category_name, category_text, day_of_week, description, category_text_long, version, uuid, sort_order, created_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """, (
-                    clean_csv_value(row['category_name']),
-                    clean_csv_value(row.get('category_text', '')),
-                    day_of_week_array,
-                    clean_csv_value(row.get('description', '')),
-                    clean_csv_value(row.get('category_text_long', '')),
-                    clean_csv_value(row.get('version', '')),
-                    clean_csv_value(row.get('uuid', '')),
-                    int(row.get('sort_order', 0)),
-                    datetime.now()
-                ))
+                # Check if uuid is present and not blank
+                uuid_value = clean_csv_value(row.get('uuid', ''))
+                if uuid_value and uuid_value.strip():
+                    # Include uuid in INSERT
+                    cursor.execute("""
+                        INSERT INTO categories (category_name, category_text, day_of_week, description, category_text_long, version, uuid, sort_order, created_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        clean_csv_value(row['category_name']),
+                        clean_csv_value(row.get('category_text', '')),
+                        day_of_week_array,
+                        clean_csv_value(row.get('description', '')),
+                        clean_csv_value(row.get('category_text_long', '')),
+                        clean_csv_value(row.get('version', '')),
+                        uuid_value,
+                        int(row.get('sort_order', 0)),
+                        datetime.now()
+                    ))
+                else:
+                    # Omit uuid, let database use default
+                    cursor.execute("""
+                        INSERT INTO categories (category_name, category_text, day_of_week, description, category_text_long, version, sort_order, created_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        clean_csv_value(row['category_name']),
+                        clean_csv_value(row.get('category_text', '')),
+                        day_of_week_array,
+                        clean_csv_value(row.get('description', '')),
+                        clean_csv_value(row.get('category_text_long', '')),
+                        clean_csv_value(row.get('version', '')),
+                        int(row.get('sort_order', 0)),
+                        datetime.now()
+                    ))
                 categories_count += 1
         conn.commit()
         print(f"    SUCCESS: {categories_count} categories imported")
@@ -135,19 +154,37 @@ def import_setup_data_chinese():
         with open(os.path.join(root_dir, 'data', 'blocks.csv'), 'r', encoding='utf-8-sig') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                cursor.execute("""
-                    INSERT INTO blocks (category_id, block_number, block_code, block_text, version, uuid, category_name, created_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                """, (
-                    int(row['category_id']),
-                    int(row['block_number']),
-                    clean_csv_value(row['block_code']),
-                    clean_csv_value(row['block_text']),
-                    clean_csv_value(row.get('version', '')),
-                    clean_csv_value(row.get('uuid', '')),
-                    clean_csv_value(row.get('category_name', '')),
-                    datetime.now()
-                ))
+                # Check if uuid is present and not blank
+                uuid_value = clean_csv_value(row.get('uuid', ''))
+                if uuid_value and uuid_value.strip():
+                    # Include uuid in INSERT
+                    cursor.execute("""
+                        INSERT INTO blocks (category_id, block_number, block_code, block_text, version, uuid, category_name, created_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        int(row['category_id']),
+                        int(row['block_number']),
+                        clean_csv_value(row['block_code']),
+                        clean_csv_value(row['block_text']),
+                        clean_csv_value(row.get('version', '')),
+                        uuid_value,
+                        clean_csv_value(row.get('category_name', '')),
+                        datetime.now()
+                    ))
+                else:
+                    # Omit uuid, let database use default
+                    cursor.execute("""
+                        INSERT INTO blocks (category_id, block_number, block_code, block_text, version, category_name, created_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        int(row['category_id']),
+                        int(row['block_number']),
+                        clean_csv_value(row['block_code']),
+                        clean_csv_value(row['block_text']),
+                        clean_csv_value(row.get('version', '')),
+                        clean_csv_value(row.get('category_name', '')),
+                        datetime.now()
+                    ))
                 blocks_count += 1
         conn.commit()
         print(f"    SUCCESS: {blocks_count} blocks imported")
