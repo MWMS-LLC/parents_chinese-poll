@@ -1,7 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import HamburgerMenu from '../components/HamburgerMenu.jsx'
+import HamburgerMenu from '../components/Hamburger.jsx'
 import Footer from '../components/Footer.jsx'
+import { HELP } from '../constants/help.zh.js'
 
 const Help = () => {
   const navigate = useNavigate()
@@ -15,11 +16,11 @@ const Help = () => {
       {/* Header Section */}
       <div style={styles.headerSection}>
         <div style={styles.backButton} onClick={() => navigate('/')}>
-          ← Back to Home
+          {HELP.backToHome}
         </div>
-        <h1 style={styles.pageTitle}>Need to Talk to Someone?</h1>
+        <h1 style={styles.pageTitle}>{HELP.pageTitle}</h1>
         <div style={styles.pageSubtitle}>
-          Here are two national directories that can help:
+          {HELP.pageSubtitle}
         </div>
       </div>
 
@@ -34,10 +35,10 @@ const Help = () => {
               rel="noopener noreferrer"
               style={styles.directoryLink}
             >
-              Find a Teen Psychiatrist - AACAP
+              {HELP.directories.aacap.title}
             </a>
-            <p style={styles.directoryDescription}>From the American Academy of Child & Adolescent Psychiatry.</p>
-            <p style={styles.disclaimer}>We don't endorse individual providers.</p>
+            <p style={styles.directoryDescription}>{HELP.directories.aacap.description}</p>
+            <p style={styles.disclaimer}>{HELP.directories.aacap.disclaimer}</p>
           </div>
         </div>
         
@@ -50,133 +51,77 @@ const Help = () => {
               rel="noopener noreferrer"
               style={styles.directoryLink}
             >
-              Find a Therapist - Psychology Today
+              {HELP.directories.psychologyToday.title}
             </a>
-            <p style={styles.directoryDescription}>Search by location, insurance, or specialty.</p>
-            <p style={styles.disclaimer}>No endorsements implied.</p>
+            <p style={styles.directoryDescription}>{HELP.directories.psychologyToday.description}</p>
+            <p style={styles.disclaimer}>{HELP.directories.psychologyToday.disclaimer}</p>
           </div>
         </div>
       </div>
 
       {/* Books Section */}
       <div style={styles.supportSection}>
-        <h2 style={styles.supportTitle}>Recommended Books</h2>
+        <h2 style={styles.supportTitle}>{HELP.recommendedBooks.title}</h2>
         
         <div style={styles.supportContainer}>
-          <div style={styles.supportCard}>
-            <div style={styles.supportIcon}>📖</div>
-            <div>
-              <a 
-                href="https://how-to-talk.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.directoryLink}
-              >
-                How To Talk So Kids Will Listen
-              </a>
-              <p style={styles.supportDescription}>
-                by Joanna Faber & Julie King. Learn skills to help children handle strong emotions and engage cooperation.
-              </p>
+          {HELP.recommendedBooks.books.map((book, index) => (
+            <div key={index} style={styles.supportCard}>
+              <div style={styles.supportIcon}>📖</div>
+              <div>
+                <a 
+                  href={index === 0 ? "https://how-to-talk.com/" : index === 1 ? "https://www.paulaxtell.com/store/10-powerful-things-to-say-to-your-kids/" : "https://www.thedisengagedteen.com/"} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={styles.directoryLink}
+                >
+                  {book.title}
+                </a>
+                <p style={styles.supportDescription}>
+                  {book.description}
+                </p>
+              </div>
             </div>
-          </div>
-          
-          <div style={styles.supportCard}>
-            <div style={styles.supportIcon}>📖</div>
-            <div>
-              <a 
-                href="https://www.paulaxtell.com/store/10-powerful-things-to-say-to-your-kids/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.directoryLink}
-              >
-                10 Powerful Things to Say to Your Kids
-              </a>
-              <p style={styles.supportDescription}>
-                by Paul Axtell. A guide to creating wonderful, lasting relationships through the power of conversation.
-              </p>
-            </div>
-          </div>
-          
-          <div style={styles.supportCard}>
-            <div style={styles.supportIcon}>📖</div>
-            <div>
-              <a 
-                href="https://www.thedisengagedteen.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.directoryLink}
-              >
-                The Awakened Family: A Revolution in Parenting
-              </a>
-              <p style={styles.supportDescription}>
-                by Shefali Tsabary Ph.D. A radically transformative plan that shows parents how to raise children to be their best, truest selves.
-              </p>
-            </div>
-          </div>
-
-          <div style={styles.supportCard}>
-            <div style={styles.supportIcon}>📖</div>
-            <div>
-              <a 
-                href="https://www.thedisengagedteen.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.directoryLink}
-              >
-                The Disengaged Teen
-              </a>
-              <p style={styles.supportDescription}>
-                by Jenny Anderson and Rebecca Winthrop. A toolkit showing what to do (and stop doing) to support teen academic and emotional flourishing.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
       {/* More Support & Education */}
       <div style={styles.supportSection}>
-        <h2 style={styles.supportTitle}>More Support & Education</h2>
+        <h2 style={styles.supportTitle}>{HELP.moreSupport.title}</h2>
         
         <div style={styles.supportContainer}>
-          <div style={styles.supportCard}>
-            <div style={styles.supportIcon}>📚</div>
-            <div>
-              <a 
-                href="https://www.aacap.org/AACAP/Families_and_Youth/Resource_Centers/Home.aspx" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.directoryLink}
-              >
-                AACAP Family & Youth Resources
-              </a>
-              <p style={styles.supportDescription}>
-                Helpful guides for parents, teens, and kids on mental health and development.
-              </p>
-            </div>
-          </div>
-          
-          <div style={styles.supportCard}>
-            <div style={styles.supportIcon}>🚫</div>
-            <div>
-              <a 
-                href="https://www.stopbullying.gov/get-help-now" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={styles.directoryLink}
-              >
-                StopBullying.gov - Get Help Now
-              </a>
-              <p style={styles.supportDescription}>
-                If you or someone you know is being bullied, this site shows what you can do—and who can help.
-              </p>
-            </div>
-          </div>
+          {HELP.moreSupport.resources.map((resource, index) => {
+            const urls = [
+              "https://www.aacap.org/AACAP/Families_and_Youth/Resource_Centers/Home.aspx",
+              "https://www.stopbullying.gov/get-help-now",
+              "https://ucawaves.org/"
+            ]
+            const icons = ['📚', '🚫', '🌊']
+            return (
+              <div key={index} style={styles.supportCard}>
+                <div style={styles.supportIcon}>{icons[index] || '📖'}</div>
+                <div>
+                  <a 
+                    href={urls[index]} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={styles.directoryLink}
+                  >
+                    {resource.title}
+                  </a>
+                  <p style={styles.supportDescription}>
+                    {resource.description}
+                  </p>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         {/* Warning Box */}
         <div style={styles.warningBox}>
           <p style={styles.warningText}>
-            This app is here to support reflection—not replace professional help. If you're ever in danger or crisis, please contact a trusted adult or call 911.
+            {HELP.moreSupport.warning}
           </p>
         </div>
       </div>
@@ -185,72 +130,36 @@ const Help = () => {
       <div style={styles.sourcesSection}>
         <h2 style={styles.sourcesTitle}>
           <span style={styles.chartIcon}>📊</span>
-          Sources & Real-World Stats
+          {HELP.sources.title}
         </h2>
         <p style={styles.sourcesIntro}>
-          Some of the questions in this app are inspired by real studies, articles, and stats. Here are a few we found helpful.
+          {HELP.sources.intro}
         </p>
         
         <div style={styles.statsList}>
-          <div style={styles.statItem}>
-            <span style={styles.statText}>Only 51% of high schoolers feel a sense of belonging → </span>
-            <a 
-              href="https://www.qualtrics.com/news/only-half-of-high-school-students-feel-a-sense-of-belonging-at-their-school-qualtrics-research-shows/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={styles.statLink}
-            >
-              Qualtrics Study
-            </a>
-          </div>
-          
-          <div style={styles.statItem}>
-            <span style={styles.statText}>Teen loneliness doubled from 2012-2018 → </span>
-            <a 
-              href="https://www.snexplores.org/article/teens-feels-lonely-school-cell-phones-internet" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={styles.statLink}
-            >
-              Science News for Students
-            </a>
-          </div>
-          
-          <div style={styles.statItem}>
-            <span style={styles.statText}>19.2% of students report being bullied → </span>
-            <a 
-              href="https://www.stopbullying.gov/resources/facts#fast-facts" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={styles.statLink}
-            >
-              StopBullying.gov
-            </a>
-          </div>
-          
-          <div style={styles.statItem}>
-            <span style={styles.statText}>What to do about bullying → </span>
-            <a 
-              href="https://www.stopbullying.gov/resources/teens" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={styles.statLink}
-            >
-              StopBullying.gov Teen Guide
-            </a>
-          </div>
-          
-          <div style={styles.statItem}>
-            <span style={styles.statText}>More than 40% of college grads are underemployed → </span>
-            <a 
-              href="https://www.wsj.com/lifestyle/careers/college-degree-jobs-unused-440b2abd" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={styles.statLink}
-            >
-              Wall Street Journal
-            </a>
-          </div>
+          {HELP.sources.stats.map((stat, index) => {
+            const urls = [
+              "https://www.taaf.org/youthmentalhealth",
+              "https://www.qualtrics.com/news/only-half-of-high-school-students-feel-a-sense-of-belonging-at-their-school-qualtrics-research-shows/",
+              "https://www.snexplores.org/article/teens-feels-lonely-school-cell-phones-internet",
+              "https://www.stopbullying.gov/resources/facts#fast-facts",
+              "https://www.stopbullying.gov/resources/teens",
+              "https://www.wsj.com/lifestyle/careers/college-degree-jobs-unused-440b2abd"
+            ]
+            return (
+              <div key={index} style={styles.statItem}>
+                <span style={styles.statText}>{stat.text} </span>
+                <a 
+                  href={urls[index]} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={styles.statLink}
+                >
+                  {stat.link}
+                </a>
+              </div>
+            )
+          })}
         </div>
       </div>
       

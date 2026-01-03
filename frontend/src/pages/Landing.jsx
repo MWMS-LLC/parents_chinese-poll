@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { fetchCategories } from '../services/apiService';
 import { createUser } from '/src/services/apiService.js';
 import { useAudio } from '../contexts/AudioContext.jsx'
-import HamburgerMenu from '../components/HamburgerMenu.jsx'
+import HamburgerMenu from '../components/Hamburger.jsx'
 import Tooltip from '../components/Tooltip'
 import Footer from '../components/Footer.jsx'
+import { LANDING } from '../constants/landing.zh.js'
 
 console.log("createUser in Landing.jsx:", createUser);
 
@@ -213,24 +214,24 @@ const Landing = () => {
       console.error('Error creating user:', err)
       
       // Set user-friendly error message
-      let errorMessage = 'Failed to create your account. '
+      let errorMessage = LANDING.userCreation.failed
       if (err.response?.status === 400) {
         // These shouldn't happen with the current UI, but handle them gracefully
         if (err.response.data?.detail?.includes('year_of_birth')) {
-          errorMessage = 'There was an issue with your age selection. Please try again.'
+          errorMessage = LANDING.userCreation.yearOfBirthError
         } else if (err.response.data?.detail?.includes('user_uuid')) {
-          errorMessage = 'There was an issue with your account ID. Please try again.'
+          errorMessage = LANDING.userCreation.userUuidError
         } else {
-          errorMessage = 'Please check your information and try again.'
+          errorMessage = LANDING.userCreation.checkInfo
         }
       } else if (err.response?.status === 500) {
-        errorMessage = 'Server error. Please try again in a moment.'
+        errorMessage = LANDING.userCreation.serverError
       } else if (err.code === 'NETWORK_ERROR') {
-        errorMessage = 'Network error. Please check your internet connection and try again.'
+        errorMessage = LANDING.userCreation.networkError
       } else if (err.message?.includes('timeout')) {
-        errorMessage = 'Request timed out. Please check your connection and try again.'
+        errorMessage = LANDING.userCreation.timeout
       } else {
-        errorMessage = 'Something went wrong. Please try again.'
+        errorMessage = LANDING.userCreation.somethingWrong
       }
       
       setUserCreationError(errorMessage)
@@ -266,7 +267,7 @@ const Landing = () => {
 
   const handleSocialShare = (platform) => {
     const url = 'https://parents-chinese.myworldmysay.com?ref=1ca99aea-8ae1-4c96-aeaa-a'
-    const text = 'Check out this parents poll app - My World My Say!'
+    const text = LANDING.sharing.shareText
     
     switch (platform) {
       case 'Discord':
@@ -297,11 +298,11 @@ const Landing = () => {
 
   // Bold, vibrant category gradients - more masculine and powerful
   const categoryGradients = {
-    1: { gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", emoji: "" }, // 1st_Thing_1st - Keep purple
+    1: { gradient: "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)", emoji: "" }, // 1st_Thing_1st - Bold purple (from 5)
     2: { gradient: "linear-gradient(135deg, #FF6B35 0%, #D63031 100%)", emoji: "" }, // Love - Bold red-orange
-    3: { gradient: "linear-gradient(135deg, #E53E3E 0%, #C53030 100%)", emoji: "" }, // Friends - Deep red
-    4: { gradient: "linear-gradient(135deg, #00B4D8 0%, #0077B6 100%)", emoji: "" }, // Online_Life - Bold blue
-    5: { gradient: "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)", emoji: "" }, // Pinky - Bold purple
+    3: { gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)", emoji: "" }, // Friends - Bold amber (from 8)
+    4: { gradient: "linear-gradient(135deg, #0891B2 0%, #0E7490 100%)", emoji: "" }, // Online_Life - Bold cyan (from 12)
+    5: { gradient: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)", emoji: "" }, // Pinky - Bold blue (from 11)
     6: { gradient: "linear-gradient(135deg, #1E40AF 0%, #1E3A8A 100%)", emoji: "" }, // Lowkey - Deep blue
     7: { gradient: "linear-gradient(135deg, #059669 0%, #047857 100%)", emoji: "" }, // Personal - Deep green
     8: { gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)", emoji: "" }, // Healing - Bold amber
@@ -329,7 +330,7 @@ const Landing = () => {
   if (loading) {
     return (
       <div style={styles.loadingContainer}>
-        <div style={styles.loadingText}>Loading your world...</div>
+        <div style={styles.loadingText}>{LANDING.loading}</div>
         <div style={styles.loadingSpinner}></div>
       </div>
     )
@@ -338,7 +339,7 @@ const Landing = () => {
   if (_error) {
     return (
       <div style={styles.errorContainer}>
-        <div style={styles.generalErrorText}>Oops! {_error}</div>
+        <div style={styles.generalErrorText}>{LANDING.error} {_error}</div>
       </div>
     )
   }
@@ -352,9 +353,9 @@ const Landing = () => {
       {showAgeDropdown && (
         <div style={styles.modalOverlay}>
           <div style={styles.modal}>
-            <h2 style={styles.modalTitle}>Welcome to Your World</h2>
+            <h2 style={styles.modalTitle}>{LANDING.welcomeModal.title}</h2>
             <div style={styles.modalText}>
-              We don't collect your name, email, or any personal info. Everything stays on your device.
+              {LANDING.welcomeModal.text}
             </div>
             
             {/* Error Display was deleted*/}
@@ -365,16 +366,16 @@ const Landing = () => {
               onChange={e => setSelectedAge(e.target.value)}
               disabled={isCreatingUser}
             >
-              <option value="">Year of Birth</option>
-              <option value="before1996">Before 1996</option>
-              <option value="after1995">After 1995</option>
+              <option value="">{LANDING.welcomeModal.yearOfBirth}</option>
+              <option value="before1996">{LANDING.welcomeModal.before1996}</option>
+              <option value="after1995">{LANDING.welcomeModal.after1995}</option>
             </select>
             
             {/* Processing indicator */}
             {isCreatingUser && (
               <div style={styles.processingMessage}>
                 <div style={styles.spinner}></div>
-                Creating your account...
+                {LANDING.welcomeModal.creatingAccount}
               </div>
             )}
             
@@ -384,14 +385,14 @@ const Landing = () => {
                 onClick={handleAgeSubmit}
                 disabled={!selectedAge || isCreatingUser}
               >
-                {isCreatingUser ? 'Creating Account...' : 'Continue'}
+                {isCreatingUser ? LANDING.welcomeModal.creatingAccount : LANDING.welcomeModal.continue}
               </button>
               <button 
                 style={styles.cancelButton} 
                 onClick={closeAgeDropdown}
                 disabled={isCreatingUser}
               >
-                Cancel
+                {LANDING.welcomeModal.cancel}
               </button>
             </div>
           </div>
@@ -402,12 +403,12 @@ const Landing = () => {
       <div style={styles.titleSection}>
         <div style={styles.logoContainer}>
           <div style={styles.logoText}>My World My Say</div>
+          <div style={styles.logoSubtitle}>{LANDING.logoSubtitle}</div>
           <div style={styles.logoGlow}></div>
         </div>
         
         <div style={styles.taglineContainer}>
-          <div style={styles.tagline}>For Parents</div>
-          <div style={styles.subtitle}>Your voice matters too.</div>
+          <div style={styles.subtitle}>{LANDING.subtitle}</div>
         </div>
       </div>
 
@@ -421,7 +422,7 @@ const Landing = () => {
             }} 
             onClick={toggleSharing}
           >
-            {showSharing ? 'Hide Link' : 'Share with your friends'}
+            {showSharing ? LANDING.sharing.hideLink : LANDING.sharing.shareWithFriends}
           </button>
         </div>
         {showSharing && (
@@ -434,10 +435,10 @@ const Landing = () => {
                 style={styles.linkInput}
               />
               <button style={styles.copyButton} onClick={handleCopyLink}>
-                {copySuccess ? 'Copied!' : 'Copy link'}
+                {copySuccess ? LANDING.sharing.copied : LANDING.sharing.copyLink}
               </button>
             </div>
-            <div style={styles.followUsText}>Follow Us:</div>
+            <div style={styles.followUsText}>{LANDING.sharing.followUs}</div>
             <div style={styles.socialButtons}>
           <button 
             style={{
@@ -599,7 +600,7 @@ const Landing = () => {
       {/* Teen Site Link */}
       <div style={styles.teenLinkSection}>
         <p style={styles.teenLinkText}>
-          Want your teen to participate too?
+          {LANDING.sharing.wantTeenParticipate}
         </p>
         <a 
           href="https://myworldmysay.com" 
@@ -607,7 +608,7 @@ const Landing = () => {
           rel="noopener noreferrer"
           style={styles.teenLink}
         >
-          Share Teen Poll →
+          {LANDING.sharing.shareTeenPoll}
         </a>
       </div>
 
@@ -852,6 +853,13 @@ const styles = {
     color: '#FFFFFF',
     textShadow: '0 0 20px #2D7D7A, 0 0 40px #2D7D7A, 0 0 60px #2D7D7A, 0 0 80px #2D7D7A, 0 0 100px #2D7D7A',
     animation: 'logoFloat 3s ease-in-out infinite'
+  },
+  
+  logoSubtitle: {
+    fontSize: '22px',
+    color: 'rgba(255, 255, 255, 0.9)',
+    marginTop: '8px',
+    fontStyle: 'italic'
   },
   
   logoGlow: {

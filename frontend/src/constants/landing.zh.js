@@ -2,8 +2,8 @@
 export const LANDING = {
   loading: '正在加载您的世界...',
   error: '哎呀！',
-  tagline: '为父母',
-  subtitle: '您的声音也很重要。',
+  logoSubtitle: '我的世界，我的声音',
+  subtitle: '家长的声音，同样重要。',
   welcomeModal: {
     title: '欢迎来到您的世界',
     text: '我们不收集您的姓名、电子邮件或任何个人信息。一切都保留在您的设备上。',
@@ -25,12 +25,14 @@ export const LANDING = {
     somethingWrong: '出了点问题。请重试。'
   },
   sharing: {
-    shareWithFriends: '与朋友分享',
+    shareWithFriends: '分享给周围的家长',
     hideLink: '隐藏链接',
     copyLink: '复制链接',
     copied: '已复制！',
     followUs: '关注我们：',
-    shareText: '查看这个父母投票应用程序 - My World My Say！'
+    shareText: '查看这个父母投票应用程序 - My World My Say！',
+    wantTeenParticipate: '也希望孩子一起参与吗？',
+    shareTeenPoll: '分享青少年问卷 →'
   },
   categories: {
     noCategories: '没有可用的类别。',

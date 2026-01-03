@@ -19,19 +19,19 @@ export const HELP = {
     title: '推荐书籍',
     books: [
       {
-        title: 'How To Talk So Kids Will Listen',
+        title: '如何说孩子才会听',
         description: '作者：Joanna Faber & Julie King。学习帮助孩子处理强烈情绪和促进合作的技能。'
       },
       {
-        title: '10 Powerful Things to Say to Your Kids',
+        title: '对孩子说的10句有力的话',
         description: '作者：Paul Axtell。通过对话的力量创造美好、持久关系的指南。'
       },
       {
-        title: 'The Awakened Family: A Revolution in Parenting',
+        title: '觉醒的家庭：育儿革命',
         description: '作者：Shefali Tsabary Ph.D.。一个彻底变革的计划，向父母展示如何培养孩子成为最好、最真实的自己。'
       },
       {
-        title: 'The Disengaged Teen',
+        title: '疏离的青少年',
         description: '作者：Jenny Anderson 和 Rebecca Winthrop。一个工具包，展示如何做（和停止做）以支持青少年的学术和情感繁荣。'
       }
     ]
@@ -46,6 +46,10 @@ export const HELP = {
       {
         title: 'StopBullying.gov - 立即获得帮助',
         description: '如果您或您认识的人正在被欺负，这个网站显示您可以做什么——以及谁可以提供帮助。'
+      },
+      {
+        title: '美国华人联盟心理健康组织 UCA WAVE',
+        description: 'UCA WAVES 致力于提升亚裔美国人和太平洋岛民社区的心理健康意识，提供教育、支持和资源。'
       }
     ],
     warning: '此应用程序旨在支持反思——不能替代专业帮助。如果您处于危险或危机中，请联系可信的成年人或拨打911。'
@@ -54,6 +58,10 @@ export const HELP = {
     title: '来源与真实世界统计',
     intro: '此应用程序中的一些问题受到真实研究、文章和统计数据的启发。以下是我们发现有用的一些。',
     stats: [
+      {
+        text: '亚裔青少年精神健康关注 →',
+        link: 'TAAF 研究报告'
+      },
       {
         text: '只有51%的高中生感到归属感 →',
         link: 'Qualtrics 研究'
@@ -77,4 +85,5 @@ export const HELP = {
     ]
   }
 }
+
 
